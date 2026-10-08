@@ -62,17 +62,17 @@ Only clone your own voice. Never commit a voice sample or share one: anyone hold
 
 ## Arabic voice (ElevenLabs)
 
-Qwen3-TTS reads Arabic badly, so Arabic narration goes through ElevenLabs instead (cloud, costs credits). Every other language stays on the free local voice, and each script refuses the other's language.
+Qwen3-TTS reads Arabic badly, so Arabic narration (Egyptian or Saudi) goes through ElevenLabs instead (cloud, costs credits). Every other language stays on the free local voice, and each script refuses the other's language.
 
 1. Put your key in `~/.config/feature-demo-video/elevenlabs.env` (`chmod 600`), as one line: `ELEVENLABS_API_KEY=...`. An `ELEVENLABS_API_KEY` environment variable wins over the file.
-2. Write the lines in Arabic. The model is `eleven_v3`, which reads emotion tags in the text: `[excited]`, `[laughs]`, `[whispers]`.
+2. Write the lines in Arabic, in the dialect you chose. The model is `eleven_v3`, which reads emotion tags in the text: `[excited]`, `[laughs]`, `[whispers]`.
 3. Run `node skills/record-demo/scripts/voice-eleven.mjs <take-dir>`. It writes the same `vo/<id>.wav` and `lines.json` as the local voice, so recording and composing don't change.
 
-Voices are Egyptian Arabic, listed in `skills/record-demo/assets/eleven-voices.json`: male `masry` (default), `haytham`, `hanafi`; female `yasmine`, `fatima`, `nadia`. Pick one with `ELEVENLABS_VOICE=nadia`, or pass any voice id with `ELEVENLABS_VOICE_ID`. Other settings: `ELEVENLABS_LANG` (default `ar`), `ELEVENLABS_MODEL`, `STABILITY` (v3 takes 0, 0.5 or 1; lower is more expressive), `TEMPO`, `REGEN=B,C` to re-take single lines.
+The agent asks which dialect you want, Egyptian or Saudi, then lets you pick a voice, recommending the default. They're listed in `skills/record-demo/assets/eleven-voices.json`. Egyptian: male `masry` (default), `haytham`, `hanafi`; female `yasmine`, `fatima`, `nadia`. Saudi: male `hasawi` (default), `fahad`, `ziyad`; female `hana`. Choose with `ELEVENLABS_VOICE=hana`, take a dialect's default with `ELEVENLABS_DIALECT=saudi`, or pass any voice id with `ELEVENLABS_VOICE_ID`. Other settings: `ELEVENLABS_LANG` (default `ar`), `ELEVENLABS_MODEL`, `STABILITY` (v3 takes 0, 0.5 or 1; lower is more expressive), `TEMPO`, `REGEN=B,C` to re-take single lines.
 
 ## Known issues
 
-- **Nobody has heard these voices outside the maintainer's one listening test.** Dialect, tone and emotion tags were checked on two short lines only. Audition a full narration as audio before you record video.
+- **Nobody has heard these voices outside the maintainer's one listening test.** Dialect, tone and emotion tags were checked on two short lines only, and the Saudi voices and wording rules not at all. Audition a full narration as audio before you record video.
 - **The voice ids come from ElevenLabs' shared Voice Library.** Their owners can retire or change them, and library access through the API may depend on your plan. If a line fails with a 4xx error, swap the voice in `eleven-voices.json`; nothing is saved to `lines.json` until every line succeeds.
 - **`eleven_v3` drifts a little in tone from clip to clip** and doesn't accept neighbouring-line context. Re-take the odd line with `REGEN`, or lower `STABILITY` on a flat one. With `eleven_multilingual_v2` the tags are stripped, because it would read them aloud.
 - **A script is "Arabic" if any line has an Arabic letter.** A mixed Arabic/English script is voiced entirely by ElevenLabs and refused by the local voice. English product names inside Arabic lines may be read with an Arabic accent.
