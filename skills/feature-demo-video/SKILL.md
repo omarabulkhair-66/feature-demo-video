@@ -66,6 +66,9 @@ Keep these scripts in `$DEMO_DIR` unless the user wants them in the project.
 bash $S/scripts/setup-local-voice.sh                            # once per machine: venv + models (~5 GB, under ~/.cache)
 node $S/scripts/voice-local.mjs $DEMO_DIR/take             # → take/vo/<id>.wav + take/vo/lines.json (durations)
 REGEN=C,D node $S/scripts/voice-local.mjs $DEMO_DIR/take   # re-take chosen lines; unchanged lines are kept
+# ARABIC ONLY (the scripts refuse the wrong language): Egyptian Arabic voices in assets/eleven-voices.json (male/female), default masry; offer the user the others. Key in ~/.config/feature-demo-video/elevenlabs.env
+# Arabic (or any language Qwen is bad at): ElevenLabs v3 with emotion tags like [excited] in the line text
+ELEVENLABS_VOICE=masry node $S/scripts/voice-eleven.mjs $DEMO_DIR/take   # same outputs; cloud, costs credits
 ```
 
 It prints which voice it used: the developer's sample from `~/.config/feature-demo-video/voice/` if there is one, otherwise the bundled default. A clone takes no style direction: delivery follows the sample, so a lively sample gives a lively narration. Pace belongs to the voice: a `sample.tempo` file beside a sample (e.g. `1.15`) speeds it up; `TEMPO=` overrides it for one run; `MAX_WPM` (off by default) caps it. Re-pacing reuses the raw takes. Voice comes before recording because beats are timed to it.
