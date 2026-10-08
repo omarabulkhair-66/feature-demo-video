@@ -1,5 +1,5 @@
 {
-  "name": "better-futures-studio",
+  "name": "omarabulkhair",
   "owner": {
     "name": "Better Futures Studio"
   },
@@ -8,7 +8,7 @@
   },
   "plugins": [
     {
-      "name": "feature-demo-video",
+      "name": "record-demo",
       "source": "./",
       "description": "Record casual team demo videos of a local web app with a locally cloned voiceover."
     }

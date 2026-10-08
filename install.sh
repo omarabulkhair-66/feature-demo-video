@@ -3,7 +3,7 @@
 # ~/.codex/skills, where Codex's own skill installer puts skills).
 # usage: ./install.sh [--claude] [--codex]   (no flag: both). Update later with `git pull`; the links follow.
 set -euo pipefail
-SKILL="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/skills/feature-demo-video"
+SKILL="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/skills/record-demo"
 targets=()
 for arg in "$@"; do
   case "$arg" in
@@ -16,7 +16,7 @@ done
 
 for dir in "${targets[@]}"; do
   mkdir -p "$dir"
-  link="$dir/feature-demo-video"
+  link="$dir/record-demo"
   if [ -e "$link" ] && [ ! -L "$link" ]; then
     echo "skipped $link: a real folder is there; move it away and run this again" >&2
     continue

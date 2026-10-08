@@ -1,5 +1,5 @@
 ---
-name: feature-demo-video
+name: record-demo
 description: Record a casual "developer shows the team a feature" demo video of any web app running locally — rough first-person voiceover cloned on this Mac (the developer's own voice if they recorded a sample, otherwise a bundled default voice), human-paced browser recording of the real flow on phone and/or desktop, composed to 1080p in light and dark, and optionally shared to a phone over Tailscale. Use when someone asks to "record a demo video of this feature", "show the team" a feature, a "walkthrough video", a "demo video with voiceover", to clone their voice for demos, or to re-take or revise a demo. Not for polished marketing videos or PR screenshots.
 ---
 
