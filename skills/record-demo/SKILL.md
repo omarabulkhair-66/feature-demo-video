@@ -77,6 +77,15 @@ It prints which voice it used: the developer's sample from `~/.config/feature-de
 
 To audition, generate the full narration into a separate take dir and join it into one track (`ffmpeg -nostdin -f concat -safe 0 -i list.txt -c:a aac track.m4a`), then share it (step 6) or give the user the file.
 
+#### Arabic narration (Egyptian)
+
+The English "casual, first person, um" style does NOT apply to Arabic.
+
+- **Register: professional Egyptian Arabic**, how someone presents at a work meeting. Not street/colloquial (no "يا جماعة", no slang, no chatty filler), and not Modern Standard Arabic (no "نستعرض في هذا الفيديو", no فصحى grammar). Good: "في الفيديو ده هنعرض…", "بقى لكل قسم رئيس…", "ولسه مفيش…".
+- **Gender-neutral, always.** Never address the viewer as male or female (no اختار/اختاري, تقدر/تقدري), and never refer to a demo person with له/لها. Use first-person plural (هنعرض، بنفتح، نختار), name the role instead of the person ("بحساب رئيس القسم", "لما ندخل بحساب حد من القسم"), or passive voice ("الطلب بيتبعت عادي").
+- **Spell for Egyptian pronunciation in script.json only**: TTS reads letters literally, so "أجازة" not "إجازة". UI labels on screen stay as the app writes them. When the user corrects a pronunciation, fix the spelling and re-take only the affected lines (`REGEN=`).
+- **Confirm the script's wording with the user before generating any voice.** Show the beat table, wait for approval of the register, then audition the full narration as audio before recording video.
+
 ### 4. Drive and record each segment
 
 Copy `templates/driver.mjs` to `$DEMO_DIR/driver.mjs` and write the beats (`examples/catch-up/driver.mjs` shows every technique). Feature-specific selectors live in the driver; `scripts/lib.mjs` has the helpers: `freshBrowser`, `openAt`, `centerOf`, `moveTo`/`moveToSelector`/`click`/`swipe`/`typeText`/`smoothScroll`, `holdTouchEmulation`, `showFinger`, `waitFor`/`waitForText`, `evalJs`, `openEmail`, `readUrls`, and `createTake` (`startSegment`, `beat(id, act, { lead, tail, after })`, `stopSegment`, `save`).
